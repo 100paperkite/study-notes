@@ -7,7 +7,7 @@ public static Boolean valueOf(boolean b){
 	return b ? Boolean.TRUE : Boolean.FALSE;
 ```
 
-### 생성자 보다 좋은 점
+생성자 보다 좋은 점
 
 - 이름을 가질 수 있어서 반환될 객체의 특성을 쉽게 묘사할 수 있다.
 - 호출될 때 마다 인스턴스를 새로 생성하지는 않아도 된다.
@@ -18,22 +18,23 @@ public static Boolean valueOf(boolean b){
 - 입력 매개변수에 따라 매번 다른 클래스의 객체를 반환할 수 있다.
 - 정적 팩터리 메서드를 작성하는 시점에는 반환할 객체의 클래스가 존재하지 않아도 된다.
 
-### 단점
+단점
 
 - 상속을 하려면 `public` 이나 `protected` 생성자가 필요하므로 정적 팩터리 메서드만 제공하면 하위 클래스를 만들 수 없다.
-- 프로그래머가 찾기 어렵기 때문에 주로 사용하는 명명 방식을 사용하자
-  - `from` : 형변환 → `Date.from(date)`
-  - `of` : 여러 매개변수를 받아 적합한 타입의 인스턴스를 반환하는 집계 메서드 → `EnumSet.of(JACK, QUEEN, KING)`
-  - `valueOf` : `from` 과 `of` 의 자세한 버전
-  - `instance` or `getInstance`
-  - `create` or `newInstance` : 매번 새로운 인스턴스를 생성함을 보장
-  - `getType` : = getInstance. 생성할 클래스가 아닌 다른 클래스에 팩터리 메서드를 정의하는 경우
-  - `newType` : = newInstance. 생성할 클래스가 아닌 다른 클래스에 팩터리 메서드를 정의하는 경우
-  - `type` : = *getType*과 *newType*의 간결한 버전.
+- 프로그래머가 찾기 어렵다.
+  - 주로 사용하는 명명 방식
+    - `from` : 형변환 → `Date.from(date)`
+    - `of` : 여러 매개변수를 받아 적합한 타입의 인스턴스를 반환하는 집계 메서드 → `EnumSet.of(JACK, QUEEN, KING)`
+    - `valueOf` : `from` 과 `of` 의 자세한 버전
+    - `instance` or `getInstance`
+    - `create` or `newInstance` : 매번 새로운 인스턴스를 생성함을 보장
+    - `get****Type` :\* = getInstance. 생성할 클래스가 아닌 다른 클래스에 팩터리 메서드를 정의하는 경우
+    - `new****Type` :\* = newInstance. 생성할 클래스가 아닌 다른 클래스에 팩터리 메서드를 정의하는 경우
+    - `t****ype` :* = *getType*과 *newType\*의 간결한 버전.
 
 ## [2] 생성자에 매개변수가 많다면 빌더를 고려하라
 
-**생성자나 정적 팩터리가 처리해야 할 매개변수가 많다면 빌더 패턴을 선택하는 게 더 낫다.**
+**\*\*\*\***\*\*\*\***\*\*\*\***생성자나 정적 팩터리가 처리해야 할 매개변수가 많다면 빌더 패턴을 선택하는 게 더 낫다.**\*\*\*\***\*\*\*\***\*\*\*\***
 
 매개변수가 많은 경우, 점층적으로 생성자를 구성할 수도 있지만, 쓰지 않는 매개변수에 모두 기본 값을 지정해주어야 하고 매개변수 개수가 많아지면 클라이언트 코드를 작성하기 어렵다. 게다가 타입이 같은 매개변수가 여러개 나열되어있으면 컴파일러가 알아채지 못해 런타임 오류가 날 수도 있다.
 
@@ -45,16 +46,16 @@ public static Boolean valueOf(boolean b){
 
 ```java
 NutritionFacts cocaCola = new NutritionFacts.Builder(240,8) // 필수 매개변수
-  .calories(100)
-  .sodium(35)
-  .build()
+															.calories(100)
+															.sodium(35)
+															.build()
 ```
 
 빌더 패턴은 계층적으로 설계된 클래스와 함께 쓰기에 좋다.
 
 **참고) Recursive parameter, and raw type**
 
-Raw type은 쓰지 말 것. 런타임 에러 남. 애초에 호환성을 위해 존재한 것이다.
+Raw type은 쓰지 말 것. 런타임 에러 남. 애초에 호환성을 위해 존재한 것임.
 
 [how generic type with a recursive type parameter along with the abstract self method allows method chaining to work properly?](https://stackoverflow.com/questions/67711974/how-generic-type-with-a-recursive-type-parameter-along-with-the-abstract-self-me)
 

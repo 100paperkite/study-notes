@@ -176,13 +176,13 @@ public interface PhysicalConstants {
 
 ```java
 public class MySet<E> extends AbstractSet<E> {
-    // 생략
-    @Override public Iterator<E> iterator() {
-            return new MyIterator();
+		// 생략
+		@Override public Iterator<E> iterator() {
+				return new MyIterator();
 
-    private class MyIterator implements Iterator<E> {
-            ...
-    }
+		private class MyIterator implements Iterator<E> {
+				...
+		}
 }
 ```
 
